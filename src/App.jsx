@@ -1,17 +1,19 @@
-import UserGreeting from "./UserGreeting.jsx"
+import './style.css';
+import UserCard from './UserCard.jsx';
 function App() {
 
 
   return (
-    <div>
+    <div style={{
+      display:'flex',
+      gap:'20px'
+    }}>
+      {/* <Button />
+       */}
 
-<h1>{2+2}</h1>
-      {/* <Student name="Ahmed mohamed" age={30} isStudent={false} />
-      <Student name="Aisha" age={18} isStudent={false}/>
-      <Student name="Ali" age={40} isStudent={true}/>
-      <Student/> */}
-
-      <UserGreeting isLoggedin={true} username="Maryama"/>
+       <UserCard/>
+       <UserCard/>
+       <UserCard/>
     </div>
   )
 }

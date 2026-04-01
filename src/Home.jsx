@@ -1,7 +1,11 @@
-function Home (){
-    return <>
-    <h1>this is home component</h1>
-        </>
+import React from 'react'
+import './style.css';
+function Home() {
+  return (
+    <div>
+      
+    </div>
+  )
 }
 
 export default Home

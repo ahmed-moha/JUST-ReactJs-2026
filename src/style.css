@@ -1,0 +1,35 @@
+.button{
+
+    background-color: blue;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+.button:hover{
+    background-color: purple;
+}
+
+.card{
+    width: 250px;
+    border: 2px solid black;
+    padding: 10px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.card img{
+    width: 100%;
+}
+.card h2{
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.card p{
+
+    font-size: 1em;
+    color: #555;
+}
