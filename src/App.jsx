@@ -1,21 +1,48 @@
+import { useState } from 'react';
 import './style.css';
 function App() {
+  // let name = "AHMED"
+  const [name, setName] = useState("ALI")
+  const [age, setAge] = useState(20)
+  const [counter, setCounter] = useState(0)
+  const handleClick = (name) => {
+    console.log("HELLOW " + name);
+  }
 
+  const handleName = () => {
+    // name="MARYAMA";
+    setName("MARYAMA")
+    setAge(30)
+
+    console.log(name)
+  }
+
+  const handleCounter = (isIncrement) => {
+    if (isIncrement) {
+      setCounter(counter + 1)
+    } else {
+      if(counter>0){
+        setCounter(counter - 1)
+      }
+      
+    }
+  }
 
   return (
-    <div>
-      
-      <div className="grid grid-cols-4 gap-2 m-10">
-       <div className="col-span-2 row-span-2 p-10 border border-blue-500 bg-blue-300">items 1</div>
-       <div className="p-10 border border-blue-500 bg-blue-300">items 2</div>
-       <div className="p-10 border border-blue-500 bg-blue-300">items 3</div>
-       <div className="p-10 border border-blue-500 bg-blue-300">items 4</div>
-      <div className="p-10 border border-blue-500 bg-blue-300">items 5</div>
-       <div className="p-10 border border-blue-500 bg-blue-300">items 6</div>
-       <div className="p-10 border border-blue-500 bg-blue-300">items 7</div>
-       <div className="col-span-2 p-10 border border-blue-500 bg-blue-300">items 8</div>
-        
-      </div>
+    <div className='m-20'>
+
+      {/* <h2>{name} is {age} years old</h2> */}
+      <h2>COUNTER: {counter}</h2>
+      {/* <button className='p-2 bg-blue-500 text-white rounded hover:bg-blue-600' onClick={handleName}
+      >Click Me</button> */}
+
+      <button className='p-2 bg-blue-500 text-white rounded hover:bg-blue-600' onClick={() => handleCounter(true)}
+      >INCREMEANT</button>
+
+
+      <button className='p-2 bg-red-500 text-white rounded hover:bg-red-600' onClick={() => handleCounter(false)}
+      >DECREMEANT</button>
+
 
     </div>
 
