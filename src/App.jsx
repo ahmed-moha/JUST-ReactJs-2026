@@ -1,34 +1,39 @@
-import React, { useReducer, useState, memo, useCallback } from 'react'
-
-// Child component that receives a function prop
-const Button = memo(({onClick, text})=>{
-  console.log("CHILD RENDERED", text);
-  return (<button className="bg-blue-500 text-white p-2 rounded-md m-2" onClick={onClick}>{text}</button>)
-});
-
-// Parent component without useCallback
+import React, { useState, useMemo } from 'react'
+const expensiveCalculation = (num) => {
+  console.log("Calculating...");
+  for(let i=0; i<1000000000; i++){
+    num = num+1;
+  }
+  return num;
+}
 function App() {
-  const [count1, setCount1] = useState(0);
-  const [count2, setCount2] = useState(0);
+  const [count, setCount] = useState(0);
+  const [todo, setTodo] = useState([]);
+const calculatedValue = expensiveCalculation(count);
+  const handleCounter=()=>{
+    setCount(count + 1);
+  }
 
-  // This function is recreated on every render
-  const handleClick1 =  useCallback(() => {
-    setCount1(count1 + 1);
-  },[count1]);
-
-  const handleClick2 =  useCallback(() => {
-    setCount2(count2 + 1);
-  },[count2]);
-
-  console.log("Parent rendered");
+  const handleTodo=()=>{
+    setTodo([...todo, {id: todo.length + 1, text: "Todo " + (todo.length + 1)}]);
+  }
   return (
     <div>
-      <h2 className="text-2xl font-bold mb-4">Without useCallback:</h2>
-      <p className="text-lg mb-4">Count 1: {count1}</p>
-      <p className="text-lg mb-4">Count 2: {count2}</p>
-      <Button onClick={handleClick1} text="Button 1" />
-      <Button onClick={handleClick2} text="Button 2" />
+
+      <h2 className='text-2xl font-bold mb-4'>My Todos</h2>
+      <ul className='list-disc list-inside'>
+        {todo.map((todo)=>(
+          <li key={todo.id}>{todo.text}</li>
+        ))}
+      </ul>
+      <button className='bg-blue-500 text-white p-2 rounded-md m-2' onClick={handleTodo}>Add Todo</button>
+      <hr />
+      <h2 className='text-2xl font-bold mb-4'>My Counter</h2>
+      <p className='text-lg mb-4'>Count: {count}</p>
+      <p className='text-lg mb-4'>Calculated Value: {calculatedValue}</p>
+      <button className='bg-blue-500 text-white p-2 rounded-md m-2' onClick={handleCounter}>Increment</button>
     </div>
-  );
+  )
 }
+
 export default App
