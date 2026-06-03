@@ -1,67 +1,34 @@
-import React, { useReducer, useState } from 'react'
-//  REDUCER
-const handleCounter=(state,action)=>{
-  if(action.nuuc==="inc"){
-    return state+=1;
-  }else if(action.nuuc==="dec"){
-    return state-=1;
-  } else if(action.nuuc==="reset"){
-    return state=0;
-  }else if(action.type==="amount"){
-    return state=state+action.amount;
-  }
+import React, { useReducer, useState, memo, useCallback } from 'react'
 
-  return state;
-}
+// Child component that receives a function prop
+const Button = memo(({onClick, text})=>{
+  console.log("CHILD RENDERED", text);
+  return (<button className="bg-blue-500 text-white p-2 rounded-md m-2" onClick={onClick}>{text}</button>)
+});
+
+// Parent component without useCallback
 function App() {
-  console.log("RENDER");
-//  const [count, setCount]=useState(0)
-const [count,dispatch]=useReducer(handleCounter,0);
- const [amount,setAmount]=useState();
+  const [count1, setCount1] = useState(0);
+  const [count2, setCount2] = useState(0);
 
+  // This function is recreated on every render
+  const handleClick1 =  useCallback(() => {
+    setCount1(count1 + 1);
+  },[count1]);
+
+  const handleClick2 =  useCallback(() => {
+    setCount2(count2 + 1);
+  },[count2]);
+
+  console.log("Parent rendered");
   return (
-    <div className="min-h-screen flex items-center justify-center bg-white text-black">
-      <div className="w-full max-w-sm bg-gray-200 rounded-lg p-6">
-        <h1 className="text-2xl font-bold mb-4">Counter</h1>
-
-        <p className="text-lg mb-4">Count:{count} </p>
-
-        <div className="flex gap-2 mb-4">
-          <button
-            className="bg-blue-500 px-3 py-2 rounded text-white"
-            onClick={()=> dispatch({nuuc:"inc"})}
-          >
-            +1
-          </button>
-          <button className="bg-red-500 px-3 py-2 rounded text-white"
-            onClick={()=>dispatch({nuuc:"dec"})}
-          >
-            -1
-          </button>
-          <button className="bg-gray-600 px-3 py-2 rounded text-white"
-            onClick={()=> dispatch({nuuc:"reset"})}
-          >
-            Reset
-          </button>
-        </div>
-
-        <div className="flex gap-2">
-          <input
-            type="number"
-            className="w-24 rounded px-2 py-1 text-black border border-gray-300"
-            value={amount}
-            onChange={(e)=>setAmount(Number(e.target.value))}
-          />
-          <button
-            className="bg-emerald-500 px-3 py-2 rounded text-white"
-            onClick={()=> dispatch({type:"amount", amount:amount})}
-          >
-            Add Amount
-          </button>
-        </div>
-      </div>
+    <div>
+      <h2 className="text-2xl font-bold mb-4">Without useCallback:</h2>
+      <p className="text-lg mb-4">Count 1: {count1}</p>
+      <p className="text-lg mb-4">Count 2: {count2}</p>
+      <Button onClick={handleClick1} text="Button 1" />
+      <Button onClick={handleClick2} text="Button 2" />
     </div>
   );
 }
-
 export default App
