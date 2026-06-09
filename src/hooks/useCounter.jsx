@@ -1,11 +1,26 @@
-import { useState } from "react";
+import { useReducer } from 'react';
 
-const useCounter=(initialValue=0)=>{
-    const [count, setCount] = useState(initialValue);
-    const increment = () => setCount(count + 1);
-    const decrement = () => setCount(count - 1);
-    const reset = () => setCount(initialValue);
-    return  [count, increment, decrement, reset ];
-}
+const counterReducer = (state, action) => {
+  switch (action.type) {
+    case 'INCREMENT':
+      return state + 1;
+    case 'DECREMENT':
+      return state - 1;
+    case 'RESET':
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
+const useCounter = (initialValue = 0) => {
+  const [count, dispatch] = useReducer(counterReducer, initialValue);
+
+  const increment = () => dispatch({ type: 'INCREMENT' });
+  const decrement = () => dispatch({ type: 'DECREMENT' });
+  const reset = () => dispatch({ type: 'RESET', payload: initialValue });
+
+  return [count, increment, decrement, reset];
+};
 
 export default useCounter;
