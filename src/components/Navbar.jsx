@@ -1,18 +1,57 @@
-import React from 'react'
-import NameContext from '../context/NameContext';
-import { useContext } from 'react';
-import Footer from './Footer';
+import { useLocation, useNavigate } from 'react-router-dom';
+
 function Navbar() {
-    const {name, age, setName, setAge} = useContext(NameContext);
-    return (                
-        <div>
-            <h2>My name is {name} and my age is {age}</h2>
+  const location = useLocation();
+  const navigate = useNavigate();
 
-            <button className='bg-blue-500 text-white p-2 rounded-md' onClick={() => setName("Faarax")}>Change Name</button>
+  const linkClass = (path) =>
+    `px-4 py-2 text-sm font-medium rounded-md transition-colors ${
+      location.pathname === path
+        ? 'text-blue-600 bg-blue-50'
+        : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+    }`;
 
-            <Footer/>
+  return (
+    <nav className="bg-white border-b border-gray-200">
+      <div className="max-w-5xl mx-auto px-6 py-4">
+        <div className="flex items-center justify-between">
+          <span className="text-xl font-semibold text-gray-900 tracking-tight">
+            My App
+          </span>
+
+          <ul className="flex items-center gap-2">
+            <li>
+              <button
+                type="button"
+                onClick={() => navigate('/')}
+                className={linkClass('/')}
+              >
+                Home
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                onClick={() => navigate('/about')}
+                className={linkClass('/about')}
+              >
+                About
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
+                onClick={() => navigate('/contact')}
+                className={linkClass('/contact')}
+              >
+                Contact
+              </button>
+            </li>
+          </ul>
         </div>
-    )
+      </div>
+    </nav>
+  );
 }
 
-export default Navbar
+export default Navbar;

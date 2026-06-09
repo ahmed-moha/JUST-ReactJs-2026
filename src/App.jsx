@@ -1,44 +1,18 @@
-import React from 'react'
-import { useContext, createContext, useState } from 'react';
-import NameContext from './context/NameContext';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+
+import AppRoutes from './routes/AppRoutes';
+
 function App() {
- const [name, setName] = useState("Ahmed");
- const [age, setAge] = useState(20);
   return (
-    <div>Hellow
-
-      <NameContext.Provider value={{name,age,setName,setAge}}>
-       <Navbar />
-      </NameContext.Provider>
+    <div className="min-h-screen flex flex-col bg-gray-50">
+      <Navbar />
+      <main className="flex-1 max-w-4xl w-full mx-auto px-4 py-8">
+      <AppRoutes/>
+      </main>
+      <Footer />
     </div>
-  )
+  );
 }
 
-export default App
-
-
-function ComponentOne(){
-  return (
-    <div>ComponentOne
-
-
-      <ComponentTwo />
-    </div>
-  )
-}
-
-function ComponentTwo(){
-  return (
-    <div>ComponentTwo
-      <ComponentThree />
-    </div>
-  )
-}   
-
-function ComponentThree(){
-  const name=useContext(NameContext);
-  return (
-    <div>Welcome {name}</div>
-  )
-}
+export default App;

@@ -1,13 +1,11 @@
-import React from 'react'
-import NameContext from '../context/NameContext';
-import { useContext } from 'react';
 function Footer() {
-    const {name} = useContext(NameContext);
   return (
-    <div>
-        <h2>This is the footer {name}</h2>
-    </div>
-  )
+    <footer className="border-t border-gray-200 bg-white mt-auto">
+      <div className="max-w-4xl mx-auto px-4 py-6 text-center text-sm text-gray-500">
+        &copy; {new Date().getFullYear()} My App. All rights reserved.
+      </div>
+    </footer>
+  );
 }
 
-export default Footer
+export default Footer;
