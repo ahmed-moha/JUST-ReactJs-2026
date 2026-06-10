@@ -1,8 +1,8 @@
-import { useLocation, useNavigate } from 'react-router-dom';
-
+import { NavLink, useNavigate, useLocation } from 'react-router-dom';
+ 
 function Navbar() {
-  const location = useLocation();
-  const navigate = useNavigate();
+const navigate=useNavigate();
+const location=useLocation();
 
   const linkClass = (path) =>
     `px-4 py-2 text-sm font-medium rounded-md transition-colors ${
@@ -15,15 +15,15 @@ function Navbar() {
     <nav className="bg-white border-b border-gray-200">
       <div className="max-w-5xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
-          <span className="text-xl font-semibold text-gray-900 tracking-tight">
+          <NavLink to="/" className="text-xl font-semibold text-gray-900 tracking-tight">
             My App
-          </span>
+          </NavLink>
 
           <ul className="flex items-center gap-2">
             <li>
               <button
                 type="button"
-                onClick={() => navigate('/')}
+                onClick={()=>navigate('/')}
                 className={linkClass('/')}
               >
                 Home
@@ -32,16 +32,22 @@ function Navbar() {
             <li>
               <button
                 type="button"
-                onClick={() => navigate('/about')}
+                onClick={()=>navigate('/about')}
                 className={linkClass('/about')}
               >
                 About
               </button>
+              {/* <NavLink to="/about" className={linkClass('/about')}>
+                About
+              </NavLink> */}
             </li>
             <li>
+              {/* <NavLink to="/contact" className={linkClass('/contact')}>
+                Contact
+              </NavLink> */}
               <button
                 type="button"
-                onClick={() => navigate('/contact')}
+                onClick={()=>navigate('/contact')}
                 className={linkClass('/contact')}
               >
                 Contact
